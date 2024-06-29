@@ -1,12 +1,16 @@
 #!/usr/bin/python3
+"""Amenity class"""
+from models.base_model import BaseModel, Base
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String
+from models.place import place_amenity
 
-""" Amenity  class"""
 
-
-from models.base_model import BaseModel
-
-
-class Amenity(BaseModel):
-
-    """ Amenity class"""
-    name = ""
+class Amenity(BaseModel, Base):
+    """new class for Amenity
+    Attr:
+        name: enter name
+    """
+    __tablename__ = "amenities"
+    name = Column(String(128), nullable=False)
+    place_amenities = relationship("Place", secondary=place_amenity)
